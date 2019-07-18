@@ -111,6 +111,8 @@ function typed(::Type{T1},::Type{T2}) where {T1,T2}
         return Float64
     elseif T1 == Float32 || T2 == Float32
         return Float32
+    elseif T1 == Float16 || T2 == Float16
+        return Float16
     elseif T1 == UInt64 || T2 == UInt64
         return UInt64
     elseif T1 == Int64 || T2 == Int64
@@ -144,6 +146,7 @@ af_type(::Type{UInt32})           = u32
 af_type(::Type{UInt8})            = u8
 af_type(::Type{Int64})            = s64
 af_type(::Type{UInt64})           = u64
+af_type(::Type{Float16})          = f16
 
 function af_jltype(i::af_dtype)::Type
     if i == f32
@@ -170,6 +173,8 @@ function af_jltype(i::af_dtype)::Type
         return Int16
     elseif i == u16
         return UInt16
+    elseif i == f16
+        return Float16
     else
         error("Unknown type: $i")
     end
